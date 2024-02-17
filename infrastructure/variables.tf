@@ -6,4 +6,13 @@ variable "location" {
 variable "environment" {
   description = "The environment for the resources"
   default     = "dev"
+  validation {
+    condition     = can(regex("^(dev|test|stage|prod)$", var.environment))
+    error_message = "The environment must be dev, test, stage or prod"
+  }
+}
+
+variable "pubsub_capacity" {
+  description = "The capacity of the webpubsub"
+  default     = 1
 }
