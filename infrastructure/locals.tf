@@ -25,5 +25,5 @@ resource "random_string" "this" {
   length  = 3
   special = false
   upper   = false
-  numeric = false
+  number  = false
 }

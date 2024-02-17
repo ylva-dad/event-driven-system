@@ -1,6 +1,6 @@
 locals {
-    sku = var.environment == "prod" ? "Standard_S2" : "Free_F1"
-    capacity = var.environment == "prod" ? 2 : var.pubsub_capacity
+  sku      = var.environment == "prod" ? "Standard_S2" : "Free_F1"
+  capacity = var.environment == "prod" ? 2 : var.pubsub_capacity
 }
 
 resource "azurerm_web_pubsub" "this" {
