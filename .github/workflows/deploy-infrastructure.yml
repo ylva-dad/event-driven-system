@@ -45,15 +45,17 @@ jobs:
       - name: Terraform plan
         id: plan
         working-directory: infrastructure
-        run: terraform plan -no-color -input=false
+        run: |
+          output=$(terraform plan -no-color -input=false)
+          echo "::set-output name=plan_output::$output"
 
       - name: Upload plan
-        run: echo "# Plan Results\n```shell\n${{ steps.plan.outputs.stdout }}\n```\n" > $GITHUB_STEP_SUMMARY
+        run: echo "# Plan Results\n```shell\n${{ steps.plan.outputs.plan_output }}\n```\n" > $GITHUB_STEP_SUMMARY
 
       # - name: Upload
       #   uses: actions/github-script@v6
       #   env:
-      #     PLAN: "terraform\n${{steps.plan.outputs.stdout }}"
+      #     PLAN: "terraform\n${{steps.plan.outputs.plan_output }}"
       #   with:
       #     script: |
 
