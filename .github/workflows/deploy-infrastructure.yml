@@ -47,7 +47,7 @@ jobs:
         working-directory: infrastructure
         run: |
           output=$(terraform plan -no-color -input=false)
-          echo "::set-output name=plan_output::$output"
+          echo "plan_output=$output" >> $GITHUB_OUTPUT
 
       - name: Upload plan
         run: echo "# Plan Results\n```shell\n${{ steps.plan.outputs.plan_output }}\n```\n" > $GITHUB_STEP_SUMMARY
