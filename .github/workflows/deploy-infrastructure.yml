@@ -27,6 +27,11 @@ jobs:
         with:
           terraform_version: 1.7.3
 
+      - name: Set up Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}          
+
       - name: Terraform init
         id: init
         working-directory: infrastructure
