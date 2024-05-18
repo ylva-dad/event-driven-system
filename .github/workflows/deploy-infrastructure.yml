@@ -25,7 +25,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.7.3
+          terraform_version: 1.8.3
 
       - name: Set up Azure CLI
         uses: azure/login@v1
@@ -47,15 +47,16 @@ jobs:
         working-directory: infrastructure
         run: terraform validate
 
+      
       - name: Terraform plan
         id: plan
         working-directory: infrastructure
         run: |
           output=$(terraform plan -no-color -input=false)
-          echo "plan_output=$output" >> $GITHUB_OUTPUT
+          echo "plan_output=$output" >> $GITHUB_ENV
 
       - name: Upload plan
-        run: echo "# Plan Results\n```shell\n${{ steps.plan.outputs.plan_output }}\n```\n" > $GITHUB_STEP_SUMMARY
+        run: echo "# Plan Results\n```shell\n${{ env.plan_output }}\n```\n" > $GITHUB_STEP_SUMMARY
 
       # - name: Upload
       #   uses: actions/github-script@v6
