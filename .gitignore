@@ -1,2 +1,3 @@
 /.versio-paused
 .idea/
+.github/workflows/azure_cli.json

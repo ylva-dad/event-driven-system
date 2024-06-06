@@ -15,6 +15,7 @@ locals {
   app_insights_name                  = "ai${local.app_code}${local.location}${local.environment}"
   app_code                           = "${random_string.this.result}${random_integer.this.result}"
   webpubsub_name                     = "wps-${local.app_code}-${local.location}-${local.environment}"
+
 }
 
 resource "random_integer" "this" {
