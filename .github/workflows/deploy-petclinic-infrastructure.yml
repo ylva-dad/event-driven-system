@@ -9,7 +9,7 @@ on:
       - "infrastructure/petclinic/**"
 
 env:
-  working-directory: infrastructure/core
+  working-directory: infrastructure/petclinic
       
 jobs:
   deploy:
