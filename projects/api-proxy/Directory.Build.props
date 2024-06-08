@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <RootNamespace>$(MSProjectName)</RootNamespace>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+</Project>
