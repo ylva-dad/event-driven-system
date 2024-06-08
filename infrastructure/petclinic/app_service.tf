@@ -9,7 +9,7 @@ resource "azurerm_service_plan" "petclinic" {
 resource "azurerm_linux_web_app" "petclinic" {
   name                = local.petclinic_app_service_name
   resource_group_name = azurerm_resource_group.this.name
-  location            = azurerm_service_plan.this.location
+  location            = azurerm_resource_group.this.location
   service_plan_id     = azurerm_service_plan.petclinic.id
 
   site_config {}
