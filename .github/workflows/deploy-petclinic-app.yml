@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'projects/java-petclinic/**'
 env:
   AZURE_WEBAPP_NAME: appsvc-petclinic-java-usc-dev  # set this to your application's name
   PETCLINIC_ROOT_PATH: ${{ github.workspace }}/projects/java-petclinic  # set this to the path to your web app project, relative to the root of the repository
