@@ -45,5 +45,6 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           package: ${{ env.PETCLINIC_ROOT_PATH }}/target/spring-petclinic.jar
+          slot-name: 'production'
 
           

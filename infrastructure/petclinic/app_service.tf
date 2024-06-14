@@ -26,8 +26,9 @@ resource "azurerm_linux_web_app" "petclinic" {
   }
 
   app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE"            = "1"
+    WEBSITE_RUN_FROM_PACKAGE              = "1"
     APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.petclinic.instrumentation_key
+    WEBSITE_WEBDEPLOY_USE_SCM             = true
   }
 
 
@@ -50,5 +51,23 @@ resource "azapi_update_resource" "backend-webapp-java-21" {
     replace_triggered_by = [
       azurerm_linux_web_app.petclinic
     ]
+  }
+}
+
+resource "azurerm_linux_web_app_slot" "petclinic" {
+  name                = "production"
+  app_service_id = azurerm_linux_web_app.petclinic.id
+  
+  site_config {
+
+    always_on        = true
+    app_command_line = "java -jar /home/site/wwwroot/petclinic.jar --server.port=80"
+
+  }
+
+  app_settings = {
+    WEBSITE_RUN_FROM_PACKAGE              = "1"
+    APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.petclinic.instrumentation_key
+    WEBSITE_WEBDEPLOY_USE_SCM             = true
   }
 }
