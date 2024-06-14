@@ -4,7 +4,3 @@ resource "azurerm_application_insights" "petclinic" {
   location            = azurerm_resource_group.this.location
   application_type    = "web"
 }
-
-output "instrumentation_key" {
-  value = azurerm_application_insights.example.instrumentation_key
-}

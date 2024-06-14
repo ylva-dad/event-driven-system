@@ -282,6 +282,7 @@
       </plugin>
 
     </plugins>
+    <finalName>spring-petclinic</finalName>
   </build>
 
   <licenses>
