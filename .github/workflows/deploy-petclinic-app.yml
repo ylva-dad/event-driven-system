@@ -5,9 +5,9 @@ on:
     branches:
       - main
 env:
-  AZURE_WEBAPP_NAME: JavaSpringPetclinic  # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }} # set this to the path to your web app project
-  JAVA_VERSION: '1.8'                # set this to the Java version to use
+  AZURE_WEBAPP_NAME: appsvc-petclinic-java-usc-dev  # set this to your application's name
+  PETCLINIC_ROOT_PATH: ${{ github.workspace }}/projects/java-petclinic  # set this to the path to your web app project, relative to the root of the repository
+  JAVA_VERSION: '21'                # set this to the Java version to use
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}     # set GH repo secret with the publish profile of the web app
 jobs:
   build-and-deploy:
@@ -20,16 +20,21 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
-          java-version: '21'
+          java-version: ${{ env.JAVA_VERSION}}
           distribution: 'adopt'
+
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Build with Maven
         run: mvn clean package
+        working-directory: ${{ env.PETCLINIC_ROOT_PATH }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.jar'
+          package: '${{ env.PETCLINIC_ROOT_PATH }}/target/*.jar'
           

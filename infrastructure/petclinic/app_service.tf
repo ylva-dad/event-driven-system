@@ -12,5 +12,11 @@ resource "azurerm_linux_web_app" "petclinic" {
   location            = azurerm_resource_group.this.location
   service_plan_id     = azurerm_service_plan.petclinic.id
 
-  site_config {}
+  site_config {
+    application_stack {
+      java_server = "java"
+      java_server_version = "java21"
+      java_version = "17"      
+    }
+  }
 }
