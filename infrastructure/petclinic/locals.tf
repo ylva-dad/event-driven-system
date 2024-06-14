@@ -16,6 +16,8 @@ locals {
   petclinic_postgres_server_name = "psql-${local.petclinic_appname}-${local.location_abbreviation}-${local.environment}"
   petclinic_postgres_db_name     = "psqldb-${local.petclinic_appname}-${local.location_abbreviation}-${local.environment}"
 
+  container_registry_name = "acr${local.petclinic_appname}${local.location_abbreviation}${local.environment}"
+
   // Map the location to the location three letter abbreviation
   location_abbreviations = {
     "eastus"    = "use"

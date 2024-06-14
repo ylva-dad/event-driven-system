@@ -11,6 +11,7 @@ env:
   AZURE_WEBAPP_NAME: appsvc-petclinic-java-usc-dev  # set this to your application's name
   PETCLINIC_ROOT_PATH: ${{ github.workspace }}/projects/java-petclinic  # set this to the path to your web app project, relative to the root of the repository
   JAVA_VERSION: '21'                # set this to the Java version to use
+  ACR_NAME: 'acrpetclinicuscdev'          # set this to the name of your Azure Container Registry
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -34,17 +35,14 @@ jobs:
         run: mvn clean package
         working-directory: ${{ env.PETCLINIC_ROOT_PATH }}
 
-      - name: Deploy Azure Java JAR with CLI
-        run: az webapp deploy --resource-group rg-petclinic-usc-dev --name ${{ env.AZURE_WEBAPP_NAME }} --src-path '${{ env.PETCLINIC_ROOT_PATH }}/target/spring-petclinic.jar'
-        env:
-          AZURE_WEBAPP_NAME: ${{ env.AZURE_WEBAPP_NAME }}
-          PETCLINIC_ROOT_PATH: ${{ env.PETCLINIC_ROOT_PATH }}
+      - name: Build Docker Image with Maven
+        run: mvn spring-boot:build-image
+        working-directory: ${{ env.PETCLINIC_ROOT_PATH }}
 
-      # - name: Azure WebApp
-      #   uses: Azure/webapps-deploy@v3
-      #   with:
-      #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
-      #     package: ${{ env.PETCLINIC_ROOT_PATH }}/target/spring-petclinic.jar
-      #     slot-name: 'production'
+      - name: Push Docker Image to Azure Container Registry
+        run: az acr login --name ${{ env.ACR_NAME }}
+        working-directory: ${{ env.PETCLINIC_ROOT_PATH }}
 
-          
+      - name: Push Docker Image to Azure Container Registry
+        run: docker push ${{ env.ACR_NAME }}.azurecr.io/spring-petclinic:latest
+        working-directory: ${{ env.PETCLINIC_ROOT_PATH }}
