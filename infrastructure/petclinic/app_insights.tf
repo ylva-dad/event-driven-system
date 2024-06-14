@@ -3,4 +3,6 @@ resource "azurerm_application_insights" "petclinic" {
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
   application_type    = "web"
+
+  tags = local.tags
 }

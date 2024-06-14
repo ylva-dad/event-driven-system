@@ -34,7 +34,7 @@ jobs:
         working-directory: ${{ env.PETCLINIC_ROOT_PATH }}
 
       - name: Deploy Azure Java JAR with CLI
-        run: az webapp deploy --resource-group --name ${{ env.AZURE_WEBAPP_NAME }} --src-path '${{ env.PETCLINIC_ROOT_PATH }}/target/spring-petclinic.jar'
+        run: az webapp deploy --resource-group rg-petclinic-usc-dev --name ${{ env.AZURE_WEBAPP_NAME }} --src-path '${{ env.PETCLINIC_ROOT_PATH }}/target/spring-petclinic.jar'
         env:
           AZURE_WEBAPP_NAME: ${{ env.AZURE_WEBAPP_NAME }}
           PETCLINIC_ROOT_PATH: ${{ env.PETCLINIC_ROOT_PATH }}

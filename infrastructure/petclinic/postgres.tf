@@ -14,6 +14,8 @@ resource "azurerm_postgresql_server" "petclinic" {
   administrator_login_password = "petclinic1234!"
   version                      = "9.5"
   ssl_enforcement_enabled      = true
+
+  tags = local.tags
 }
 
 resource "azurerm_postgresql_database" "petclinic" {

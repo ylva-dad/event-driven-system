@@ -13,3 +13,12 @@ variable "environment" {
 }
 
 
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default = {
+    owner = "DevOps Team"
+    tier  = "Tier1"
+  }
+
+}

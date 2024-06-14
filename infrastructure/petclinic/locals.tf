@@ -27,6 +27,10 @@ locals {
 
   application_insights_name = "ai-${local.petclinic_appname}-${local.location_abbreviation}-${local.environment}"
 
+  tags = merge(var.tags, {
+    environment = local.environment
+    appname     = local.petclinic_appname
+  })
 }
 
 resource "random_integer" "this" {
