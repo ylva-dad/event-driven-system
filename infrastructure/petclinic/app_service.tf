@@ -34,10 +34,12 @@ resource "azurerm_linux_web_app" "petclinic" {
   tags = local.tags
 }
 
+## Update the Java version to 21
+## Issue in terraform per https://github.com/hashicorp/terraform-provider-azurerm/issues/25490
 resource "azapi_update_resource" "backend-webapp-java-21" {
   type        = "Microsoft.Web/sites@2023-01-01"
   resource_id = azurerm_linux_web_app.petclinic.id
-  body        = jsonencode({
+  body = jsonencode({
     properties = {
       siteConfig = {
         linuxFxVersion = "JAVA|21-java21"
