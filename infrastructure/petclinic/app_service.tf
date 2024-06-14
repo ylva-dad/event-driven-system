@@ -20,8 +20,8 @@ resource "azurerm_linux_web_app" "petclinic" {
     always_on = true
 
     application_stack {
-      docker_image_name = "spring-petclinic:latest"
-      docker_registry_url = "https://${azurerm_container_registry.this.login_server}"
+      docker_image_name        = "spring-petclinic:latest"
+      docker_registry_url      = "https://${azurerm_container_registry.this.login_server}"
       docker_registry_username = azurerm_container_registry.this.admin_username
       docker_registry_password = azurerm_container_registry.this.admin_password
     }
