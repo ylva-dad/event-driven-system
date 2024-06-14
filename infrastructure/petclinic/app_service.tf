@@ -16,11 +16,12 @@ resource "azurerm_linux_web_app" "petclinic" {
     application_stack {
       java_server         = "JAVA"
       java_server_version = "JAVA21"
-      java_version = "17"
+      java_version        = "17"
     }
   }
 
   app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE" = "1"
+    "WEBSITE_RUN_FROM_PACKAGE"            = "1"
+    APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.petclinic.instrumentation_key
   }
 }

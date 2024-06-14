@@ -25,6 +25,8 @@ locals {
     "westus2"   = "usw2"
   }
 
+  application_insights_name = "ai-${local.petclinic_appname}-${local.location_abbreviation}-${local.environment}"
+
 }
 
 resource "random_integer" "this" {
