@@ -1,5 +1,5 @@
 output "resource_group_name" {
-  value = azurerm_resource_group.petclinic.name
+  value = azurerm_resource_group.this.name
 }
 
 output "app_service_name" {
