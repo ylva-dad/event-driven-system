@@ -55,7 +55,7 @@ resource "azapi_update_resource" "backend-webapp-java-21" {
 }
 
 resource "azurerm_linux_web_app_slot" "petclinic" {
-  name                = "production"
+  name                = "staging"
   app_service_id = azurerm_linux_web_app.petclinic.id
   
   site_config {
