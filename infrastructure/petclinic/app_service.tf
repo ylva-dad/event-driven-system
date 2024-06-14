@@ -18,19 +18,21 @@ resource "azurerm_linux_web_app" "petclinic" {
   site_config {
 
     always_on        = true
-    app_command_line = "java -jar /home/site/wwwroot/spring-petclinic.jar"
 
     application_stack {
       java_version = "17"
     }
   }
 
-  app_settings = {
-    WEBSITE_RUN_FROM_PACKAGE              = "1"
-    APPLICATIONINSIGHTS_CONNECTION_STRING = azurerm_application_insights.petclinic.instrumentation_key
-    WEBSITE_WEBDEPLOY_USE_SCM             = true
-  }
+  https_only = true
 
+  app_settings = {
+    WEBSITE_RUN_FROM_PACKAGE                   = "1"
+    ApplicationInsightsAgent_EXTENSION_VERSION = "~3"
+    APPINSIGHTS_INSTRUMENTATIONKEY             = azurerm_application_insights.petclinic.instrumentation_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING      = azurerm_application_insights.petclinic.connection_string
+    WEBSITE_WEBDEPLOY_USE_SCM                  = true
+  }
 
   tags = local.tags
 }
