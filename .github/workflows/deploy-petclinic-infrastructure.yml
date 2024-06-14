@@ -96,3 +96,9 @@ jobs:
 
       - name: Terraform apply
         run: terraform apply -auto-approve
+
+      - name: Get Terraform Output to a variable
+        id: output
+        run: |
+          terraform output -json > output.json
+          az webapp restart --name $(jq -r '.app_service_name.value' output.json) --resource-group $(jq -r '.resource_group_name.value' output.json)
