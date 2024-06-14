@@ -24,6 +24,7 @@ jobs:
         with:
           java-version: ${{ env.JAVA_VERSION}}
           distribution: 'adopt'
+          cache: 'maven'
 
       - uses: azure/login@v2
         with:
