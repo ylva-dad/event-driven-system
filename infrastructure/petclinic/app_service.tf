@@ -16,6 +16,7 @@ resource "azurerm_linux_web_app" "petclinic" {
     application_stack {
       java_server         = "JAVA"
       java_server_version = "JAVA21"
+      java_version = "17"
     }
   }
 
